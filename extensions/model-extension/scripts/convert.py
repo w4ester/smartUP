@@ -690,8 +690,7 @@ def merge_sharded(models: list[LazyModel]) -> LazyModel:
             # the tensor is just duplicated in every file
             return lazy_tensors[0]
         if name.startswith('tok_embeddings.') or \
-           name.endswith('.attention.wo.weight') or \
-           name.endswith('.feed_forward.w2.weight'):
+           name.endswith(('.attention.wo.weight', '.feed_forward.w2.weight')):
             # split by columns
             axis = 1
         else:
